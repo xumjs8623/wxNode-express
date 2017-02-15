@@ -4,11 +4,15 @@ const config = require('../config/wechat.js');
 const crypto = require('crypto');
 const url = require('url');
 // var wechat = require('wechat');
-
+// get方法用来验证url合法性
 router.get('/', function(req, res, next) {
+
+  wechatAuth(req, res);
+});
+// post方法用来接受微信消息
+router.post('/',function(req,res,next){
 	console.log('请求路径');
 	console.log(req);
-  wechatAuth(req, res);
 });
 module.exports = router;
 
