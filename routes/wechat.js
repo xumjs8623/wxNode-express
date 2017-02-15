@@ -41,6 +41,7 @@ function wechatAuth(req, res) {
 
   if (signature === sha1Str) {
     res.end(echostr);
+    console.log(echostr);
   } else {
     res.end("false");
     console.log("授权失败!");
