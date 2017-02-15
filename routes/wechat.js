@@ -16,7 +16,6 @@ router.post('/',function(req,res,next){
 	req.json(req);
 });
 module.exports = router;
-
 // 功能性函数
 //进行sha1加密
 function sha1(str) {
