@@ -6,8 +6,8 @@ var wechat = require('wechat');
 // router.get('/', function(req, res, next) {
 
 // });
-router.get('/', function(req, res.next) {
-  wechat(config, function(req, res.next) {
+router.get('/', function(req, res, next) {
+  wechat(config, function(req, res, next) {
     // 微信输入信息都在req.weixin上 
     var message = req.weixin;
     if (message.FromUserName === 'diaosi') {
