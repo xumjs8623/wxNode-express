@@ -4,6 +4,6 @@ const config = require('../config/wechat.js');
 // var wechat = require('wechat');
 
 router.get('/', function(req, res, next) {
-	res.send('111');
+	res.json({icon:'111'});
 });
 module.exports = router;
