@@ -12,7 +12,7 @@ router.get('/', function(req, res, next) {
 // post方法用来接受微信消息
 router.post('/',function(req,res,next){
 	console.log('请求路径');
-	req.send(req);
+	console.log(req.body.xml.content);
 });
 module.exports = router;
 
