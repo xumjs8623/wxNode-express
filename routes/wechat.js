@@ -13,7 +13,6 @@ router.get('/', function(req, res, next) {
 router.post('/',function(req,res,next){
 	console.log('请求路径');
 	console.log(req.body);
-	req.json(req);
 });
 module.exports = router;
 // 功能性函数
