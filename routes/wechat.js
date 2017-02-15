@@ -2,6 +2,7 @@ var express = require('express');
 var router = express.Router();
 const config = require('../config/wechat.js');
 const crypto = require('crypto');
+const url = require('url');
 // var wechat = require('wechat');
 
 router.get('/', function(req, res, next) {
