@@ -8,7 +8,7 @@ var bodyParser = require('body-parser');
 var index = require('./routes/index');
 var users = require('./routes/users');
 var api = require('./routes/api');
-var token=require('./routes/token');
+var wechat=require('./routes/wechat');
 var app = express();
 
 // view engine setup
@@ -23,7 +23,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 // token令牌
-app.use('/token',token);
+app.use('/wechat',wechat);
 // 前台
 app.use('/', index);
 // 后台
