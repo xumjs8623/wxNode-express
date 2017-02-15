@@ -6,6 +6,8 @@ const url = require('url');
 // var wechat = require('wechat');
 
 router.get('/', function(req, res, next) {
+	console.log('请求路径');
+	console.log(req);
   wechatAuth(req, res);
 });
 module.exports = router;
