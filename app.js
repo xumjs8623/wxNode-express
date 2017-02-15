@@ -23,7 +23,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 // token令牌
-app.use('/wechat',wechat(req, res, next));
+app.use('/wechat',wechat);
 // 前台
 app.use('/', index);
 // 后台
