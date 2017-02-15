@@ -1,7 +1,7 @@
 var express = require('express');
 var router = express.Router();
 var isLegel = function(signature, timestamp, nonce) {
-  var TOKEN = 'tnwechattest';
+  var TOKEN = 'xumj8955';
   var arr = [TOKEN, timestamp, nonce];
   // 对三个参数进行字典序排序
   arr.sort();
