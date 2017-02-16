@@ -5,7 +5,7 @@ module.exports = function (sqlStr, params) {
 
   connection.connect();
 
-    var query = connection.query(sqlStr, params, function (err, rows, fields) {
+    var query = connection.query(sqlStr, function (err, rows, fields) {
       if (err) throw err;
       var data=[];
       for(var i=0;i<rows.lenght;i++){
