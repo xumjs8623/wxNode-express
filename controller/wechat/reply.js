@@ -29,7 +29,7 @@ module.exports = function(message, req,res) {
     case 'text':
     	switch(message.Content){
     		case 'h':
-    		sql('INSERT INTO user(openid) VALUES(?)',[message.FromUserName]);
+    		sql('INSERT INTO user(openid,create_time) VALUES(?,?)',[message.FromUserName,moment().format()]);
     			res.reply({
     				content:'成功',
     				type:'text'
