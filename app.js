@@ -28,9 +28,18 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 // token令牌
 // app.use('/wechat',wechat);
+
+// 前台
+app.use('/', index);
+// 后台
+app.use('/users', users);
+// api接口
+app.use('/api',api);
+// 微信wechat
 app.use('/wechat', wechat(config, function (req, res, next) {
   // 微信输入信息都在req.weixin上
   var message = req.weixin;
+  console.log(message);
   if (message.FromUserName === 'diaosi') {
     // 回复屌丝(普通回复)
     res.reply('hehe');
@@ -64,12 +73,6 @@ app.use('/wechat', wechat(config, function (req, res, next) {
     ]);
   }
 }));
-// 前台
-app.use('/', index);
-// 后台
-app.use('/users', users);
-// api接口
-app.use('/api',api);
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   var err = new Error('Not Found');
