@@ -17,7 +17,7 @@ module.exports = function(message, req) {
       // MsgType: 'text',
       // Content: 'hehe',
       // MsgId: '6387512669246748009' }
-    case 'txt':
+    case 'text':
     	switch(message.Content){
     		case 'h':
     			req.reply({
