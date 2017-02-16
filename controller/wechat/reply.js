@@ -9,7 +9,7 @@ module.exports = function(message, res) {
     // Event: 'unsubscribe',/'subscribe'
     // EventKey: '' }
     case 'event':
-    	if(message.EventKey=='subscribe'){
+    	if(message.Event=='subscribe'){
     		res.reply({
     			title:'欢迎关注清影微信，这里有最新的科技资讯',
     			description:'这里是前端工程师的游乐场',
