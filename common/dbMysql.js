@@ -7,24 +7,20 @@ module.exports = function (sqlStr, params) {
   if (params = '') {
     var query = connection.query(sqlStr, function (err, rows, fields) {
       if (err) throw err;
-      console.log('err');
-      console.log(err);
-      console.log('rows');
-      console.log(rows);
-      console.log('fields');
-      console.log(fields);
-      // console.log('The solution is: ', rows[0].solution);
+      var data=[];
+      for(var i=0;i<rows.lenght;i++){
+        data.push(rows.RowDataPacket);
+      }
+      console.log(data);
     });
   } else {
     var query = connection.query(sqlStr, params, function (err, rows, fields) {
       if (err) throw err;
-      console.log('err');
-      console.log(err);
-      console.log('rows');
-      console.log(rows);
-      console.log('fields');
-      console.log(fields);
-      // console.log('The solution is: ', rows[0].solution);
+      var data=[];
+      for(var i=0;i<rows.lenght;i++){
+        data.push(rows.RowDataPacket);
+      }
+      console.log(data);
     });
   }
 
