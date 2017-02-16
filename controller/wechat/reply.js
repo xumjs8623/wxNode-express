@@ -1,5 +1,6 @@
+var sql=require('../../common/dbMysql.js');
 // 微信关键词回复模块
-module.exports = function(message, res) {
+module.exports = function(message, req,res) {
   switch (message.MsgType) {
     // 关注和取注公众号
     // { ToUserName: 'gh_471f0c38b32e',
@@ -10,6 +11,7 @@ module.exports = function(message, res) {
     // EventKey: '' }
     case 'event':
     	if(message.Event=='subscribe'){
+    		sql('INSERT INTO user(openid, creat_time,login_time) VALUES('+message.FormUserName+',?,?)');
     		res.reply({
     			title:'欢迎关注清影微信，这里有最新的科技资讯',
     			description:'这里是前端工程师的游乐场',
