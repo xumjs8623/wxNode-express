@@ -1,36 +1,38 @@
 var express = require('express');
 var wechat = require('wechat');
+var config=require('../config/wechat.js');
 var app = express();
 app.use(express.query());
-app.use('/', wechat('some token', function (req, res, next) {
-  // message is located in req.weixin
+app.use('/', wechat(config, function (req, res, next) {
+  // 微信输入信息都在req.weixin上
   var message = req.weixin;
   if (message.FromUserName === 'diaosi') {
-    // reply with text
+    // 回复屌丝(普通回复)
     res.reply('hehe');
   } else if (message.FromUserName === 'text') {
-    // another way to reply with text
+    //你也可以这样回复text类型的信息
     res.reply({
       content: 'text object',
       type: 'text'
     });
   } else if (message.FromUserName === 'hehe') {
-    // reply with music
+    // 回复一段音乐
     res.reply({
       type: "music",
       content: {
-        title: "Just some music",
-        description: "I have nothing to lose",
+        title: "来段音乐吧",
+        description: "一无所有",
         musicUrl: "http://mp3.com/xx.mp3",
-        hqMusicUrl: "http://mp3.com/xx.mp3"
+        hqMusicUrl: "http://mp3.com/xx.mp3",
+        thumbMediaId: "thisThumbMediaId"
       }
     });
   } else {
-    // reply with thumbnails posts
+    // 回复高富帅(图文回复)
     res.reply([
       {
-        title: 'Come to fetch me',
-        description: 'or you want to play in another way ?',
+        title: '你来我家接我吧',
+        description: '这是女神与高富帅之间的对话',
         picurl: 'http://nodeapi.cloudfoundry.com/qrcode.jpg',
         url: 'http://nodeapi.cloudfoundry.com/'
       }
