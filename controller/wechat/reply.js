@@ -11,7 +11,7 @@ module.exports = function(message, req,res) {
     // EventKey: '' }
     case 'event':
     	if(message.Event=='subscribe'){
-    		sql('INSERT INTO user(openid, creat_time,login_time) VALUES('+message.FormUserName+',?,?)');
+    		
     		res.reply({
     			title:'欢迎关注清影微信，这里有最新的科技资讯',
     			description:'这里是前端工程师的游乐场',
@@ -29,6 +29,7 @@ module.exports = function(message, req,res) {
     case 'text':
     	switch(message.Content){
     		case 'h':
+    		sql('INSERT INTO user(openid) VALUES('+message.FormUserName+')');
     			res.reply({
     				content:'成功',
     				type:'text'
