@@ -1,5 +1,5 @@
 // 微信关键词回复模块
-module.exports = function(message, req) {
+module.exports = function(message, res) {
   switch (message.MsgType) {
     // 关注和取注公众号
     // { ToUserName: 'gh_471f0c38b32e',
@@ -20,7 +20,7 @@ module.exports = function(message, req) {
     case 'text':
     	switch(message.Content){
     		case 'h':
-    			req.reply({
+    			res.reply({
     				content:'成功',
     				type:'text'
     			});
