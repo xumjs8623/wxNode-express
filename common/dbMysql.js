@@ -15,16 +15,15 @@ module.exports = function(sqlStr, params) {
       // console.log(data);
     });
   } else {
-    var query = connection.query(sqlStr, params
-      function(err, rows, fields) {
-        if (err) throw err;
-        console.log(rows);
-        // var data=[];
-        // for(var i=0;i<rows.lenght;i++){
-        //   data.push(rows[i].RowDataPacket);
-        // }
-        // console.log(data);
-      });
+    var query = connection.query(sqlStr, params, function(err, rows, fields) {
+      if (err) throw err;
+      console.log(rows);
+      // var data=[];
+      // for(var i=0;i<rows.lenght;i++){
+      //   data.push(rows[i].RowDataPacket);
+      // }
+      // console.log(data);
+    });
   }
 
 
