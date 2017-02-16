@@ -9,6 +9,13 @@ module.exports = function(message, res) {
     // Event: 'unsubscribe',/'subscribe'
     // EventKey: '' }
     case 'event':
+    	if(message.EventKey=='subscribe'){
+    		res.reply({
+    			title:'欢迎关注清影微信，这里有最新的科技资讯',
+    			description:'这里是前端工程师的游乐场',
+    			picurl:'www.baidu.com'
+    		});
+    	}
       break;
       // 文本类型
       // { ToUserName: 'gh_471f0c38b32e',
