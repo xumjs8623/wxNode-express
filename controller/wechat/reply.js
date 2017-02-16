@@ -37,6 +37,11 @@ module.exports = function (message, req, res) {
             type: 'text'
           });
           break;
+        default:
+        res.reply({
+            content: '不清楚你在说什么',
+            type: 'text'
+          });
       }
       break;
     // 发送位置
