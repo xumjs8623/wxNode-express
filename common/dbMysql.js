@@ -9,7 +9,7 @@ module.exports = function (sqlStr, params) {
       if (err) throw err;
       var data=[];
       for(var i=0;i<rows.lenght;i++){
-        data.push(rows.RowDataPacket);
+        data.push(rows[i].RowDataPacket);
       }
       console.log(data);
     });
@@ -18,7 +18,7 @@ module.exports = function (sqlStr, params) {
       if (err) throw err;
       var data=[];
       for(var i=0;i<rows.lenght;i++){
-        data.push(rows.RowDataPacket);
+        data.push(rows[i].RowDataPacket);
       }
       console.log(data);
     });
