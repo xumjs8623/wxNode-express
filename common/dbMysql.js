@@ -5,10 +5,10 @@ module.exports = function(sqlStr,params) {
 
   connection.connect();
 
-  connection.query(sqlStr, params, function(err, rows, fields) {
+  var query=connection.query(sqlStr, params, function(err, rows, fields) {
     if (err) throw err;
     // console.log('The solution is: ', rows[0].solution);
   });
-
+  console.log(query.sql)
   connection.end();
 }
