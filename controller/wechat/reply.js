@@ -31,7 +31,8 @@ module.exports = function (message, req, res) {
       switch (message.Content) {
         case 'h':
           // sql('INSERT INTO user(openid,creat_time) VALUES(?,?)', [message.FromUserName, moment().format("YYYY-MM-DD HH:mm:ss")]);
-          sql('SELECT * FROM user','');
+          var data=sql('SELECT * FROM user','');
+          console.log(data);
           res.reply({
             content: '成功',
             type: 'text'
