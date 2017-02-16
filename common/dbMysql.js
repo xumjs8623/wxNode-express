@@ -7,7 +7,7 @@ module.exports = function(sqlStr,params) {
 
   connection.query(sqlStr, params, function(err, rows, fields) {
     if (err) throw err;
-    console.log('The solution is: ', rows[0].solution);
+    // console.log('The solution is: ', rows[0].solution);
   });
 
   connection.end();
