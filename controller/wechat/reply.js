@@ -1,4 +1,5 @@
 var sql=require('../../common/dbMysql.js');
+var moment = require('moment');//时间包
 // 微信关键词回复模块
 module.exports = function(message, req,res) {
   switch (message.MsgType) {
