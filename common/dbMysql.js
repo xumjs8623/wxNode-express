@@ -7,6 +7,7 @@ module.exports = function(sqlStr, params) {
   if (params == '') {
     var query = connection.query(sqlStr, function(err, rows, fields) {
       if (err) throw err;
+      console.log(rows);
       return rows;
     });
   } else {
