@@ -34,7 +34,7 @@ module.exports = function (message, req, res) {
           var data=sql('SELECT * FROM user','');
           console.log(data);
           res.reply({
-            content: '成功',
+            content: data,
             type: 'text'
           });
           break;
