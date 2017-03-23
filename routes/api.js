@@ -4,13 +4,12 @@ var moment=require('moment');
 var request = require('request');
 var sql = require('../common/dbMysql.js');
 var apiSend=require('../controller/api/apiSend.js');
+var upload = require('../common/multerUpload.js');
 /* GET home page. */
 router.get('/', function(req, res, next) {
   apiSend(res);
 });
-router.get('/test',function(req,res,next){
-  res.send(moment().format("YYYY-MM-DD HH:mm:ss"));
-});
+router.get('/upload', upload);
 router.get('/local', function(req, res, next){
 	sql('select * from user', function(data){
 		res.json(data);
