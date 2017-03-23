@@ -9,7 +9,13 @@ var upload = require('../common/multerUpload.js');
 router.get('/', function(req, res, next) {
   apiSend(res);
 });
-router.get('/upload', upload);
+router.get('/up', function(req, res,next){
+	res.send('成功');
+});
+// 上传接口
+router.post('/upload', function(req, res, next){
+	upload(req, res);
+});
 router.get('/local', function(req, res, next){
 	sql('select * from user', function(data){
 		res.json(data);
