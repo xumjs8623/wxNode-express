@@ -1,5 +1,7 @@
 // 引入上传文件模块
 var multer = require('multer');
+// 引入七牛云存储封装模块
+var qiniu = require('./qiniu.js');
 var storage = multer.diskStorage({
     //设置上传后文件路径，uploads文件夹会自动创建。
     destination: function (req, file, cb) {
@@ -32,7 +34,10 @@ var dataInput = function (req, res) {
             return console.log(err);
         }
         //文件信息在req.file或者req.files中显示。
-        res.json(req.file);
+        qiniu(req.file.filename, req.file.path, function(filePath){
+             res.json({url: filePath});
+        });
+       
     });
 }
 //导出对象
