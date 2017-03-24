@@ -33,6 +33,7 @@ var dataInput = function (req, res) {
             // res.json()
             return console.log(err);
         }
+        // 调用七牛上传
         //文件信息在req.file或者req.files中显示。
         qiniu(req.file.filename, req.file.path, function(filePath){
              res.json({url: filePath});
