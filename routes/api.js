@@ -9,8 +9,18 @@ var upload = require('../common/multerUpload.js');
 router.get('/', function(req, res, next) {
   apiSend(res);
 });
-router.get('/up', function(req, res,next){
-	res.send('成功');
+router.post('/login', function(req, res,next){
+	// res.send('成功');
+	console.log(req);
+	var data = {};
+	if(req.body.username == 'admin@hzyy' && req.body.password == '123456'){
+		data['code'] = 2;
+		data['msg'] = '登录成功'
+	}else{
+		data['code'] = 0;
+		data['msg'] = '登录失败'
+	}
+	res.json(data);
 });
 // 上传接口
 router.post('/upload', function(req, res, next){
