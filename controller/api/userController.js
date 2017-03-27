@@ -1,22 +1,34 @@
 // sql 封装
 var sql = require('../../common/dbMysql');
+// 引入时间格式化插件
+var moment=require('moment');
 // 加密模块
-var crypto = require( 'crypto' );		//引入  crypto 模块
-var md5 = function(data) { 	//定义加密函数
+var crypto = require('crypto');		//引入  crypto 模块
+var md5 = function (data) { 	//定义加密函数
     return crypto.createHash('md5').update(data).digest('hex').toLowerCase();
-} 
+}
 // 登录模块
 exports.loginUser = function (req, res, next) {
-    console.log(req);
-    var data = {};
-    if (req.body.username == 'admin@hzyy' && req.body.password == '123456') {
-        data['code'] = 1;
-        data['msg'] = '登录成功'
-    } else {
-        data['code'] = 0;
-        data['msg'] = '登录失败'
-    }
-    res.json(data);
+    sql("SELECT * FROM user WHERE username = '" + req.body.username + "'", function (data) {
+        switch (data.length) {
+            case 1:
+                if (md5(req.body.password) == data[0].password) {
+                    // 更新用户表，添加最后登录时间
+                    sql("UPDATE user SET logintime = '"+moment().format('YYYY-MM-DD HH:mm:ss')+"' WHERE username = '"+req.body.username+"'");
+                    // 返回成功状态码
+                    res.json({ code: 1, msg: '登录成功' });
+                } else {
+                    res.json({ code: 0, msg: '密码错误' });
+                }
+                break;
+            case 0:
+                res.json({ code: 0, msg: '账号不存在' });
+                break;
+            default:
+                res.json({ code: 0, msg: '数据错误，请联系管理员' });
+                break;
+        }
+    })
 };
 // 重置账户密码
 exports.reset = function (req, res, next) {
