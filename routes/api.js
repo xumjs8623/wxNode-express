@@ -1,31 +1,32 @@
 var express = require('express');
+// 引入路由
 var router = express.Router();
+// 引入时间格式化插件
 var moment=require('moment');
+// 发送请求插件
 var request = require('request');
+// mysql 封装插件
 var sql = require('../common/dbMysql.js');
+// api发送控制器
 var apiSend=require('../controller/api/apiSend.js');
+// 上传插件
 var upload = require('../common/multerUpload.js');
+// 引入用户控制器
+var userControl = require('../controller/api/userController');
+
 /* GET home page. */
 router.get('/', function(req, res, next) {
   apiSend(res);
 });
-router.post('/login', function(req, res,next){
-	// res.send('成功');
-	console.log(req);
-	var data = {};
-	if(req.body.username == 'admin@hzyy' && req.body.password == '123456'){
-		data['code'] = 2;
-		data['msg'] = '登录成功'
-	}else{
-		data['code'] = 0;
-		data['msg'] = '登录失败'
-	}
-	res.json(data);
-});
-// 上传接口
+// 登录接口
+router.post('/login', userControl.loginUser);
+// 上传到本地服务器
 router.post('/upload', function(req, res, next){
 	upload(req, res);
 });
+// 初始化设置用户名和密码
+router.get('/setUser/*',userControl.reset);
+
 router.get('/local', function(req, res, next){
 	sql('select * from user', function(data){
 		res.json(data);
