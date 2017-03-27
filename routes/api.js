@@ -21,9 +21,7 @@ router.get('/', function(req, res, next) {
 // 登录接口
 router.post('/login', userControl.loginUser);
 // 上传到本地服务器
-router.post('/upload', function(req, res, next){
-	upload(req, res);
-});
+router.post('/upload', upload);
 // 初始化设置用户名和密码
 router.get('/setUser/*',userControl.reset);
 
