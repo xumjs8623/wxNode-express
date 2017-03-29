@@ -31,13 +31,16 @@ var dataInput = function (req, res) {
         //添加错误处理
         if (err) {
             // res.json()
+            res.send('error|网络出错');
             return console.log(err);
+        }else{
+            // 调用七牛上传
+            //文件信息在req.file或者req.files中显示。
+            qiniu(req.file.filename, req.file.path, function(filePath){
+                 res.send(filePath);
+            });
         }
-        // 调用七牛上传
-        //文件信息在req.file或者req.files中显示。
-        qiniu(req.file.filename, req.file.path, function(filePath){
-             res.json({url: filePath});
-        });
+        
        
     });
 }
