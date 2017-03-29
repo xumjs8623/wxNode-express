@@ -2,6 +2,8 @@
 var sql = require('../../common/dbMysql');
 // 引入时间格式化插件
 var moment=require('moment');
+// 引入返回模板
+var resTpl = require('./resTpl.js');
 // 加密模块
 var crypto = require('crypto');		//引入  crypto 模块
 var md5 = function (data) { 	//定义加密函数
@@ -16,16 +18,16 @@ exports.loginUser = function (req, res, next) {
                     // 更新用户表，添加最后登录时间
                     sql("UPDATE user SET logintime = '"+moment().format('YYYY-MM-DD HH:mm:ss')+"' WHERE username = '"+req.body.username+"'");
                     // 返回成功状态码
-                    res.json({ code: 1, msg: '登录成功' });
+                    res.json(resTpl('success','登录成功'));
                 } else {
-                    res.json({ code: 0, msg: '密码错误' });
+                    res.json(resTpl('error','密码错误'));
                 }
                 break;
             case 0:
-                res.json({ code: 0, msg: '账号不存在' });
+                res.json(resTpl('error','账号不存在'));
                 break;
             default:
-                res.json({ code: 0, msg: '数据错误，请联系管理员' });
+                res.json(resTpl('error','网络错误'));
                 break;
         }
     })
