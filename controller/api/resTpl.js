@@ -5,11 +5,13 @@ module.exports = (stat, msg, data) => {
     msg: msg,
     data: []
   };
-  // 如果不穿入数据，那么设置data为[]
+  // 如果不传入入数据，那么设置data为[]
   if (data = '') {
     returnData['data'] = [];
+  }else{
+    returnData['data'] = data;
   }
-  // 根据状态码来设置返回模板
+  // 根据状态标签来设置返回模板
   switch (stat) {
     case 'success':
       returnData['code'] = 1;

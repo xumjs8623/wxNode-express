@@ -9,18 +9,24 @@ var sqlconfig = {
 // 引入mysql包
 var mysql = require('mysql');
 // 传入sql语句和回调函数
-module.exports = function (sqlStr, callback) {
-  // 创建数据库连接，并把数据库参数传入
-  var connection = mysql.createConnection(sqlconfig);
-  // 连接数据库
-  connection.connect();
-  // 执行sql语句
-  var query = connection.query(sqlStr, function (err, rows, fields) {
-    // 如果有报错那就抛出异常
-    if (err) throw err;
-    // 没有报错那就执行回调函数，并把得到的数据传入回调函数 
-    callback(rows);
+module.exports = function (sqlStr,params) {
+  // 采用promise进行封装
+  return new Promise(function (reslove, reject) {
+    // 创建数据库连接，并把数据库参数传入
+    var connection = mysql.createConnection(sqlconfig);
+    // 连接数据库
+    connection.connect();
+    // 执行sql语句
+    connection.query(sqlStr, params, function (err, results, fields) {
+      // 如果有报错那就抛出异常
+      if (err) {
+        reject(err);
+      } else {
+        reslove(results);
+      }
+    });
+    // 关闭数据库连接
+    connection.end();
   });
-  // 关闭数据库连接
-  connection.end();
+
 };
