@@ -4,7 +4,6 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
-var session = require('express-session');
 // 引入路由js
 var index = require('./routes/index');
 var users = require('./routes/users');
@@ -15,6 +14,8 @@ var wechat = require('wechat');
 var config = require('./config/wechat.js');
 // 引入微信关键词回复模块
 var wechatReply = require('./controller/wechat/reply.js');
+// 引入token解密模块,加密模块在user控制器 登录成功后的回调内
+var expressJwt =  require('express-jwt');
 // 设置静态资源和模板引擎
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -29,22 +30,12 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 // token令牌
 // app.use('/wechat',wechat);
-// 设置session
-app.use(session({
-  secret: 'keyboard cat',
-  resave: false,
-  saveUninitialized: false,
-  key: 'sid',
-  cookie: {
-    secure: false
-  }
-}));
 // 允许跨域请求
 app.all('*', function (req, res, next) {
   res.header('Access-Control-Allow-Origin', '*');
-  res.header('Access-Control-Allow-Headers', 'Content-Type, Content-Length, Authorization, Accept, X-Requested-With , yourHeaderFeild');
+  res.header('Access-Control-Allow-Headers', 'Content-Type, Content-Length, Authorization, Accept, X-Requested-With , yourHeaderFeild, token');
   res.header('Access-Control-Allow-Methods', 'PUT, POST, GET, DELETE, OPTIONS');
-
+  res.header('Access-Control-Allow-Credentials', 'true');
   if (req.method == 'OPTIONS') {
     res.send(200); /让options请求快速返回/
   }

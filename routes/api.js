@@ -13,18 +13,20 @@ var apiSend=require('../controller/api/apiSend.js');
 var upload = require('../common/multerUpload.js');
 // 引入用户控制器
 var userControl = require('../controller/api/userController');
-
+var ExpressJwt = require('express-jwt');
 /* GET home page. */
 router.get('/', function(req, res, next) {
   apiSend(res);
 });
+
 // 登录接口
 router.post('/login', userControl.loginUser);
 // 上传到本地服务器
 router.post('/upload', upload);
 // 初始化设置用户名和密码
 router.get('/setUser/*',userControl.reset);
-
+// 接口测试
+router.get('/test', userControl.test);
 router.get('/local', function(req, res, next){
 	sql('select * from user', function(data){
 		res.json(data);
