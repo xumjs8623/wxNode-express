@@ -25,9 +25,9 @@ exports.loginUser = function (req, res, next) {
               sql("UPDATE user SET logintime = ? WHERE username = ?", [moment().format('YYYY-MM-DD HH:mm:ss'), req.body.username]);
               const mytoken = jwt.sign({ username: req.body.username }, 'xuminjun', { expiresIn: '1d' });
               // 返回成功状态码
-              res.json({ token: mytoken, code: 1 });
+              res.cookie('token', mytoken);
+              res.json({ code: 1 });
             } else {
-              res.cookie('token',mytoken);
               res.json(resTpl('error', '密码错误'));
             }
             break;
@@ -53,8 +53,9 @@ exports.reset = function (req, res, next) {
 }
 // 测试模块
 exports.test = function (req, res, next) {
-  const mytoken = req.headers.token;
-  const decoded = jwt.verify(mytoken, 'xuminjun');
-  console.log(decoded);
+  // console.log(req);
+  // const mytoken = req.headers.token;
+  // const decoded = jwt.verify(mytoken, 'xuminjun');
+  // console.log(decoded);
   res.send('111');
 }

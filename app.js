@@ -14,8 +14,6 @@ var wechat = require('wechat');
 var config = require('./config/wechat.js');
 // 引入微信关键词回复模块
 var wechatReply = require('./controller/wechat/reply.js');
-// 引入token解密模块,加密模块在user控制器 登录成功后的回调内
-var expressJwt =  require('express-jwt');
 // 设置静态资源和模板引擎
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -33,7 +31,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 // 允许跨域请求
 app.all('*', function (req, res, next) {
   res.header('Access-Control-Allow-Origin', '*');
-  res.header('Access-Control-Allow-Headers', 'Content-Type, Content-Length, Authorization, Accept, X-Requested-With , yourHeaderFeild, token');
+  res.header('Access-Control-Allow-Headers', 'Content-Type, Content-Length, Authorization, Accept, X-Requested-With , yourHeaderFeild, x-access-token');
   res.header('Access-Control-Allow-Methods', 'PUT, POST, GET, DELETE, OPTIONS');
   res.header('Access-Control-Allow-Credentials', 'true');
   if (req.method == 'OPTIONS') {

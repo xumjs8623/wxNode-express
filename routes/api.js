@@ -26,7 +26,7 @@ router.post('/upload', upload);
 // 初始化设置用户名和密码
 router.get('/setUser/*',userControl.reset);
 // 接口测试
-router.get('/test', userControl.test);
+router.post('/test', userControl.test);
 router.get('/local', function(req, res, next){
 	sql('select * from user', function(data){
 		res.json(data);
