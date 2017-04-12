@@ -4,6 +4,8 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
+// 引入身份认证
+var auth =require('./middlewares/auth');
 // 引入路由js
 var index = require('./routes/index');
 var users = require('./routes/users');
@@ -26,11 +28,13 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
-// token令牌
+
 // app.use('/wechat',wechat);
 // 允许跨域请求
 app.all('*', function (req, res, next) {
-  res.header('Access-Control-Allow-Origin', '*');
+  // 因为响应头带有cookie，所以不能设置*，故将访问的地址设置为可允许访问
+  console.log(req.headers.origin);
+  res.header('Access-Control-Allow-Origin', req.headers.origin);
   res.header('Access-Control-Allow-Headers', 'Content-Type, Content-Length, Authorization, Accept, X-Requested-With , yourHeaderFeild, x-access-token');
   res.header('Access-Control-Allow-Methods', 'PUT, POST, GET, DELETE, OPTIONS');
   res.header('Access-Control-Allow-Credentials', 'true');
@@ -46,7 +50,7 @@ app.use('/', index);
 // 后台
 app.use('/users', users);
 // api接口
-app.use('/api', api);
+app.use('/api', auth, api);
 // 微信wechat
 app.use('/wechat', wechat(config, function (req, res, next) {
   // 微信输入信息都在req.weixin上

@@ -13,7 +13,6 @@ var apiSend=require('../controller/api/apiSend.js');
 var upload = require('../common/multerUpload.js');
 // 引入用户控制器
 var userControl = require('../controller/api/userController');
-var ExpressJwt = require('express-jwt');
 /* GET home page. */
 router.get('/', function(req, res, next) {
   apiSend(res);
@@ -24,9 +23,9 @@ router.post('/login', userControl.loginUser);
 // 上传到本地服务器
 router.post('/upload', upload);
 // 初始化设置用户名和密码
-router.get('/setUser/*',userControl.reset);
+router.get('/setUser/*', userControl.reset);
 // 接口测试
-router.post('/test', userControl.test);
+router.get('/test', userControl.test);
 router.get('/local', function(req, res, next){
 	sql('select * from user', function(data){
 		res.json(data);
@@ -36,5 +35,5 @@ router.get('/baidu', function(req, res, next){
 	request('http://www.baidu.com',function(error, response, body){
 		res.send(response)
 	})
-})
+});
 module.exports = router;
